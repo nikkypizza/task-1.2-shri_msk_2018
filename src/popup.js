@@ -6,7 +6,7 @@ function getTableRowHtml(obj) {
         </tr>
     `;
 }
-export function getPopupContent(obj) {
+export function getPopupContent(obj) { // ??
 
   const htmlStatus = obj.isActive ?
     `<div class="station-info-active">active</div>` :

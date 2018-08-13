@@ -1,6 +1,6 @@
 import { loadList, loadDetails } from './api';
 import { getDetailsContentLayout } from './details';
-import { createFilterControl } from './filter'; //ok
+import { createFilterControl } from './filter';
 
 export function initMap(ymaps, containerId) {
   const myMap = new ymaps.Map(containerId, {
@@ -13,7 +13,7 @@ export function initMap(ymaps, containerId) {
     gridSize: 128, // должно равняться 2^n
     clusterIconLayout: 'default#pieChart',
     clusterDisableClickZoom: false,
-    geoObjectOpenBalloonOnClick: true,
+    geoObjectOpenBalloonOnClick: false,
     geoObjectHideIconOnBalloonOpen: false,
     geoObjectBalloonContentLayout: getDetailsContentLayout(ymaps)
   });
@@ -28,7 +28,6 @@ export function initMap(ymaps, containerId) {
   objectManager.objects.events.add('click', event => {
     const objectId = event.get('objectId');
     const obj = objectManager.objects.getById(objectId);
-
     objectManager.objects.balloon.open(objectId);
 
     if (!obj.properties.details) {

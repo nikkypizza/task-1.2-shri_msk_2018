@@ -33,12 +33,7 @@ export function getDetailsContentLayout(ymaps) {
 
         if (details) {
           const container = this.getElement().querySelector('.details-chart');
-
-          this.connectionChart = createChart(
-            container,
-            details.chart,
-            details.isActive
-          );
+          this.connectionChart = createChart(container, details.chart, details.isActive);
         }
       },
 
