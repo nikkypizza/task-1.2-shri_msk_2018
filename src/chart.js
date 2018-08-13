@@ -1,4 +1,4 @@
-import { Chart } from 'chart.js';
+// import { Chart } from './chart'; лишний код кмк
 
 function getColor(isActive, alpha = 1) {
   return isActive
@@ -35,7 +35,7 @@ export function createChart(container, data, isActive) {
       ]
     },
     options: {
-        legend: { 
+        legend: {
             display: false
         },
         scales: {
