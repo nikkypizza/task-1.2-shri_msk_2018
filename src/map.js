@@ -1,6 +1,6 @@
-import { loadList, loadDetails } from './api';
-import { getDetailsContentLayout } from './details';
-import { createFilterControl } from './filter';
+import {loadList, loadDetails} from './api';
+import {getDetailsContentLayout} from './details';
+import {createFilterControl} from './filter';
 
 export function initMap(ymaps, containerId) {
   const myMap = new ymaps.Map(containerId, {
@@ -11,7 +11,7 @@ export function initMap(ymaps, containerId) {
   const objectManager = new ymaps.ObjectManager({
     clusterize: true,
     gridSize: 128, // должно равняться 2^n
-    clusterIconLayout: 'default#pieChart',
+    clusterIconLayout: `default#pieChart`,
     clusterDisableClickZoom: false,
     geoObjectOpenBalloonOnClick: false,
     geoObjectHideIconOnBalloonOpen: false,
@@ -20,18 +20,18 @@ export function initMap(ymaps, containerId) {
 
   myMap.geoObjects.add(objectManager);
 
-  loadList().then(data => {
+  loadList().then((data) => {
     objectManager.add(data);
   });
 
   // details
-  objectManager.objects.events.add('click', event => {
-    const objectId = event.get('objectId');
+  objectManager.objects.events.add(`click`, (event) => {
+    const objectId = event.get(`objectId`);
     const obj = objectManager.objects.getById(objectId);
     objectManager.objects.balloon.open(objectId);
 
     if (!obj.properties.details) {
-      loadDetails(objectId).then(data => {
+      loadDetails(objectId).then((data) => {
         obj.properties.details = data;
         objectManager.objects.balloon.setData(obj);
       });
@@ -42,10 +42,10 @@ export function initMap(ymaps, containerId) {
   const listBoxControl = createFilterControl(ymaps);
   myMap.controls.add(listBoxControl);
 
-  var filterMonitor = new ymaps.Monitor(listBoxControl.state);
-  filterMonitor.add('filters', filters => {
+  let filterMonitor = new ymaps.Monitor(listBoxControl.state);
+  filterMonitor.add(`filters`, (filters) => {
     objectManager.setFilter(
-      obj => filters[obj.isActive ? 'active' : 'defective']
+        (obj) => filters[obj.isActive ? `active` : `defective`]
     );
   });
 }
